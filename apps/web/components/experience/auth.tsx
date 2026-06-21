@@ -4,13 +4,15 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { LockKeyhole, ArrowRight } from 'lucide-react';
+import { LockKeyhole, ArrowRight, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 import { Section, Surface } from '@/components/experience/primitives';
 import { useHerFlowsStore } from '@/lib/store';
 import { api } from '@/lib/api';
+import { useState } from 'react';
 
 export function AuthExperience({ mode }: { mode: 'login' | 'register' }) {
+  const [apiError, setApiError] = useState('');
   const schema = z.object({
     name:
       mode === 'register' ? z.string().min(2, 'Name is required') : z.string().optional(),
@@ -26,16 +28,21 @@ export function AuthExperience({ mode }: { mode: 'login' | 'register' }) {
   const setAuth = useHerFlowsStore((s) => s.setAuth);
 
   const onSubmit = async (values: FormValues) => {
-    const response = await api.post<{ accessToken?: string; refreshToken?: string }>(
-      `/auth/${mode}`,
-      values,
-    );
-    if (response.accessToken) {
-      localStorage.setItem('accessToken', response.accessToken);
-      if (response.refreshToken) localStorage.setItem('refreshToken', response.refreshToken);
-      setAuth(response.accessToken);
+    setApiError('');
+    try {
+      const response = await api.post<{ accessToken?: string; refreshToken?: string }>(
+        `/auth/${mode}`,
+        values,
+      );
+      if (response.accessToken) {
+        localStorage.setItem('accessToken', response.accessToken);
+        if (response.refreshToken) localStorage.setItem('refreshToken', response.refreshToken);
+        setAuth(response.accessToken);
+      }
+      window.location.href = mode === 'register' ? '/onboarding' : '/dashboard';
+    } catch (e) {
+      setApiError(e instanceof Error ? e.message : 'Something went wrong');
     }
-    window.location.href = mode === 'register' ? '/onboarding' : '/dashboard';
   };
 
   return (
@@ -108,6 +115,12 @@ export function AuthExperience({ mode }: { mode: 'login' | 'register' }) {
             </div>
           )}
 
+          {apiError && (
+            <div className="flex items-center gap-2 rounded-2xl bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              {apiError}
+            </div>
+          )}
           <motion.button
             whileTap={{ scale: 0.97 }}
             disabled={isSubmitting}
