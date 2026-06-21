@@ -30,9 +30,11 @@ export function AuthExperience({ mode }: { mode: 'login' | 'register' }) {
   const onSubmit = async (values: FormValues) => {
     setApiError('');
     try {
+      const { name, ...body } = values;
+      const payload = mode === 'login' ? body : values;
       const response = await api.post<{ accessToken?: string; refreshToken?: string }>(
         `/auth/${mode}`,
-        values,
+        payload,
       );
       if (response.accessToken) {
         localStorage.setItem('accessToken', response.accessToken);
