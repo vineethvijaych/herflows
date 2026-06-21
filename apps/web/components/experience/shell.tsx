@@ -127,13 +127,22 @@ function TopNav() {
               </button>
             </div>
 
-            <button
+            <motion.button
               onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center justify-center rounded-full p-2 text-stone-600 md:hidden"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              whileTap={{ scale: 0.9 }}
             >
-              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+              <motion.div
+                key={menuOpen ? 'close' : 'menu'}
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </motion.div>
+            </motion.button>
           </>
         )}
 
@@ -204,28 +213,41 @@ function BottomNav() {
   if (!isAuthenticated) return null;
 
   return (
-    <nav className="fixed inset-x-2 bottom-2 z-50 md:hidden" aria-label="Primary navigation">
+    <motion.nav
+      initial={{ y: 80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+      className="fixed inset-x-2 bottom-2 z-50 md:hidden"
+      aria-label="Primary navigation"
+    >
       <div className="flex items-stretch gap-0.5 rounded-[2rem] border border-rose-200/60 bg-rose-50/90 p-1.5 shadow-lg backdrop-blur-2xl overflow-x-auto scrollbar-hide">
-        {mobileRoutes.map((route) => {
+        {mobileRoutes.map((route, i) => {
           const active = pathname === route.href || (route.href !== '/' && pathname.startsWith(route.href));
           return (
-            <Link
+            <motion.div
               key={route.href}
-              href={route.href}
-              className={cn(
-                'flex min-h-14 flex-1 shrink-0 basis-0 flex-col items-center justify-center gap-0.5 rounded-[1.3rem] px-1.5 text-[0.62rem] font-semibold transition-all duration-200',
-                active
-                  ? 'bg-stone-950 text-white shadow-lg'
-                  : 'text-stone-600 hover:bg-rose-100/70 hover:text-stone-950',
-              )}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 + i * 0.05 }}
+              className="flex-1"
             >
-              <route.icon className="h-5 w-5" aria-hidden="true" />
-              <span className="leading-tight">{route.label}</span>
-            </Link>
+              <Link
+                href={route.href}
+                className={cn(
+                  'flex min-h-14 flex-1 shrink-0 basis-0 flex-col items-center justify-center gap-0.5 rounded-[1.3rem] px-1.5 text-[0.62rem] font-semibold transition-all duration-200',
+                  active
+                    ? 'bg-stone-950 text-white shadow-lg'
+                    : 'text-stone-600 hover:bg-rose-100/70 hover:text-stone-950',
+                )}
+              >
+                <route.icon className="h-5 w-5" aria-hidden="true" />
+                <span className="leading-tight">{route.label}</span>
+              </Link>
+            </motion.div>
           );
         })}
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 
