@@ -205,7 +205,7 @@ function BottomNav() {
 
   return (
     <nav className="fixed inset-x-2 bottom-2 z-50 md:hidden" aria-label="Primary navigation">
-      <div className="flex items-stretch gap-0.5 rounded-[1.7rem] border border-stone-200/70 bg-white p-1.5 shadow-lg backdrop-blur-2xl overflow-x-auto scrollbar-hide">
+      <div className="flex items-stretch gap-0.5 rounded-[2rem] border border-rose-200/60 bg-rose-50/90 p-1.5 shadow-lg backdrop-blur-2xl overflow-x-auto scrollbar-hide">
         {mobileRoutes.map((route) => {
           const active = pathname === route.href || (route.href !== '/' && pathname.startsWith(route.href));
           return (
@@ -213,13 +213,13 @@ function BottomNav() {
               key={route.href}
               href={route.href}
               className={cn(
-                'flex min-h-12 flex-1 shrink-0 basis-0 flex-col items-center justify-center gap-0.5 rounded-[1.2rem] px-1 text-[0.6rem] font-semibold transition-all duration-200',
+                'flex min-h-14 flex-1 shrink-0 basis-0 flex-col items-center justify-center gap-0.5 rounded-[1.3rem] px-1.5 text-[0.62rem] font-semibold transition-all duration-200',
                 active
                   ? 'bg-stone-950 text-white shadow-lg'
-                  : 'text-stone-600 hover:bg-stone-100 hover:text-stone-950',
+                  : 'text-stone-600 hover:bg-rose-100/70 hover:text-stone-950',
               )}
             >
-              <route.icon className="h-4 w-4" aria-hidden="true" />
+              <route.icon className="h-5 w-5" aria-hidden="true" />
               <span className="leading-tight">{route.label}</span>
             </Link>
           );
