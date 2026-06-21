@@ -36,9 +36,9 @@ const topRoutes = [
 
 const mobileRoutes = [
   { href: '/', label: 'Cycle', icon: CalendarDays },
-  { href: '/products', label: 'Discover', icon: Compass },
-  { href: '/kit-builder', label: 'My Kit', icon: Wand2 },
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/products', label: 'Shop', icon: Compass },
+  { href: '/kit-builder', label: 'Kit', icon: Wand2 },
+  { href: '/dashboard', label: 'Home', icon: LayoutDashboard },
   { href: '/settings', label: 'Profile', icon: UserRound },
 ];
 
@@ -205,7 +205,7 @@ function BottomNav() {
 
   return (
     <nav className="fixed inset-x-2 bottom-2 z-50 md:hidden" aria-label="Primary navigation">
-      <div className="flex items-stretch gap-0.5 rounded-[1.7rem] border border-white/90 bg-white/95 p-1.5 shadow-lg backdrop-blur-2xl overflow-x-auto scrollbar-hide">
+      <div className="flex items-stretch gap-1 rounded-[2rem] border border-white/90 bg-white/95 p-1.5 shadow-lg backdrop-blur-2xl overflow-x-auto scrollbar-hide">
         {mobileRoutes.map((route) => {
           const active = pathname === route.href || (route.href !== '/' && pathname.startsWith(route.href));
           return (
@@ -213,11 +213,11 @@ function BottomNav() {
               key={route.href}
               href={route.href}
               className={cn(
-                'flex min-h-12 flex-1 shrink-0 basis-0 flex-col items-center justify-center gap-0.5 rounded-[1.2rem] px-1 text-[0.6rem] font-semibold transition-all duration-200',
-                active ? 'bg-stone-950 text-white shadow-lg' : 'text-stone-700 hover:bg-white/70 hover:text-stone-950',
+                'flex min-h-14 flex-1 shrink-0 basis-0 flex-col items-center justify-center gap-1 rounded-[1.4rem] px-2 text-[0.65rem] font-bold transition-all duration-200',
+                active ? 'bg-stone-950 text-white shadow-lg' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-950',
               )}
             >
-              <route.icon className="h-4 w-4" aria-hidden="true" />
+              <route.icon className="h-5 w-5" aria-hidden="true" />
               <span className="leading-tight">{route.label}</span>
             </Link>
           );
