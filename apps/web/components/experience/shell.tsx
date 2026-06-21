@@ -47,7 +47,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-dvh overflow-x-hidden bg-gradient-to-b from-[#fffaf6] via-[#fbf7f1] to-[#f5f7f1] text-stone-950">
       <div className="fixed inset-0 -z-10 bg-grid opacity-[0.35]" />
       <TopNav />
-      <main className="pb-36 pt-20 md:pb-10 md:pt-24">
+      <main className="pb-36 pt-16 md:pb-10 md:pt-24">
         <PageTransition>{children}</PageTransition>
       </main>
       <SiteFooter />

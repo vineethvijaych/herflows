@@ -278,7 +278,7 @@ export type PageHeaderProps = {
 
 export function PageHeader({ eyebrow, title, copy, icon, children, className }: PageHeaderProps) {
   return (
-    <section className={cn('mx-auto max-w-7xl px-4 pb-6 pt-20 sm:px-6 lg:px-8', className)}>
+    <section className={cn('mx-auto max-w-7xl px-4 pb-6 pt-6 sm:px-6 lg:px-8', className)}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
