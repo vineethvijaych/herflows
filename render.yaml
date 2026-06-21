@@ -2,7 +2,6 @@ services:
   - type: web
     name: herflows-api
     env: node
-    rootDir: apps/api
-    buildCommand: npm install && npx prisma generate && npm run build
-    startCommand: node dist/main
+    buildCommand: cd apps/api && npm install && npx prisma generate && npm run build
+    startCommand: cd apps/api && node dist/main
     plan: free
