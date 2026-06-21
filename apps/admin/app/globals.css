@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  body {
+    @apply bg-admin-bg text-admin-text font-sans antialiased;
+  }
+  select, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], input[type="date"], input[type="datetime-local"], textarea {
+    @apply input-field;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-admin-card rounded-xl shadow-sm border border-gray-200;
+  }
+  .card-body { @apply p-6; }
+  .stat-card {
+    @apply card p-6;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center font-medium transition-colors text-sm;
+  }
+  .btn-primary {
+    @apply bg-admin-accent text-white px-4 py-2 rounded-lg hover:bg-admin-accent-hover transition-colors font-medium text-sm;
+  }
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm;
+  }
+  .input-field {
+    @apply w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-admin-accent focus:ring-2 focus:ring-admin-accent/20 outline-none transition-all text-sm bg-white;
+  }
+  select.input-field, .input-field select {
+    @apply appearance-none cursor-pointer;
+  }
+  textarea.input-field {
+    @apply resize-y min-h-[80px];
+  }
+  .badge {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-success { @apply badge bg-green-100 text-green-700; }
+  .badge-warning { @apply badge bg-amber-100 text-amber-700; }
+  .badge-error { @apply badge bg-red-100 text-red-700; }
+  .badge-info { @apply badge bg-blue-100 text-blue-700; }
+  .badge-pending { @apply badge bg-purple-100 text-purple-700; }
+  
+  .table-header {
+    @apply text-left p-3 font-medium text-gray-500 text-xs uppercase tracking-wider;
+  }
+  .table-cell {
+    @apply p-3 text-sm;
+  }
+  .page-title {
+    @apply text-2xl font-bold text-admin-text;
+  }
+  .page-header {
+    @apply flex items-center justify-between mb-6;
+  }
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  .form-group {
+    @apply mb-4;
+  }
+  .form-error {
+    @apply text-red-500 text-xs mt-1;
+  }
+  .select {
+    @apply input-field appearance-none cursor-pointer;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.25s ease-out;
+}

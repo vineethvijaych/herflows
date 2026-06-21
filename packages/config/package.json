@@ -1,0 +1,9 @@
+{
+  "name": "@herflows/config",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
